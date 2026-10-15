@@ -37,9 +37,7 @@ li em{font-style:normal;color:var(--mut);font-size:12px}
 @media(max-width:1000px){.resumo,.dias{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.resumo,.dias{grid-template-columns:1fr}}
 @media print{header{background:#fff;color:#000}.dias{grid-template-columns:repeat(5,1fr)}}
-.tag{font-size:11px;background:#1b63b8;color:#fff;border-radius:8px;padding:0 7px;margin-left:6px;vertical-align:1px}
 li.ef{font-weight:600}
-.leg{margin:0 0 14px;color:var(--mut);font-size:13px}
 </style>
 </head>
 <body>
@@ -48,7 +46,6 @@ li.ef{font-weight:600}
   <p>Feira do Empreendedor · de 19 a 23 de outubro · quem estará presencialmente, por dia e período</p>
 </header>
 <main>
-  <p class="leg"><span class="tag" style="margin:0">efetivo</span> = funcionário efetivo · sem etiqueta = estagiário</p>
   <section class="resumo" id="resumo"></section>
   <section class="dias" id="dias"></section>
   <section class="ausentes" id="aus"></section>
@@ -57,7 +54,7 @@ li.ef{font-weight:600}
 const D={"dias": [{"dia": "19", "nome": "Segunda-feira", "manha": ["Bianca", "Cauã", "Cristiane", "Dayane", "Felipe", "Flavia", "Jennifer", "Larissa", "Lidiane", "Nayara", "Rebeca", "Ricardo", "Simone", "Thiago", "Wagner"], "tarde": ["Cauã", "Cristiane", "Dayane", "Felipe", "Flavia", "Jennifer", "João", "Larissa", "Lidiane", "Nayara", "Rebeca", "Simone", "Thiago", "Wagner"]}, {"dia": "20", "nome": "Terça-feira", "manha": ["Bianca", "Cauã", "Dayane", "Felipe", "Jennifer", "João", "Larissa", "Thiago", "Wagner"], "tarde": ["Cauã", "Dayane", "Felipe", "Jennifer", "João", "Larissa", "Thiago", "Wagner"]}, {"dia": "21", "nome": "Quarta-feira", "manha": ["Cauã", "Dayane", "Jennifer", "João", "Larissa", "Rebeca"], "tarde": ["Cauã", "Dayane", "Jennifer", "João", "Julio", "Larissa", "Rebeca"]}, {"dia": "22", "nome": "Quinta-feira", "manha": ["Bianca", "Cauã", "Felipe", "Jennifer", "João", "Julio", "Larissa", "Rebeca", "Thiago", "Wagner"], "tarde": ["Cauã", "Felipe", "Jennifer", "João", "Julio", "Larissa", "Mario", "Rebeca", "Thiago", "Wagner"]}, {"dia": "23", "nome": "Sexta-feira", "manha": ["Bianca", "Cauã", "Dayane", "Felipe", "Jennifer", "Julio", "Larissa", "Rebeca", "Thiago", "Wagner"], "tarde": ["Cauã", "Dayane", "Felipe", "Jennifer", "Julio", "Larissa", "Rebeca", "Thiago", "Wagner"]}], "ausentes": ["Artur", "G. Mendes", "G. Prato", "Juan", "Luciano", "Sabrina", "Valeria", "Victor"], "total": 26};
 const EF=new Set(['Bianca','Cristiane','Flavia','Lidiane','Nayara','Ricardo','Simone','João','Julio','Wagner','Mario']);
 const ord=a=>[...a.filter(n=>EF.has(n)),...a.filter(n=>!EF.has(n))];
-const lista=(a)=>a.length?`<ul>${ord(a).map(n=>EF.has(n)?`<li class="ef">${n}<span class="tag">efetivo</span></li>`:`<li>${n}</li>`).join('')}</ul>`:'<div class="vazio">Ninguém presencial</div>';
+const lista=(a)=>a.length?`<ul>${ord(a).map(n=>EF.has(n)?`<li class="ef">${n}</li>`:`<li>${n}</li>`).join('')}</ul>`:'<div class="vazio">Ninguém presencial</div>';
 const per=(c,t,a)=>`<div class="per ${c}"><h3>${t}<i>${a.length}</i></h3>${lista(a)}</div>`;
 document.getElementById('resumo').innerHTML=D.dias.map(d=>{
   const s=[...new Set([...d.manha,...d.tarde])];const u=s.length,ne=s.filter(n=>EF.has(n)).length;
